@@ -1,7 +1,11 @@
 package controller;
 import processing.core.*;
 import controlP5.*;
+import model.Arc;
+import model.Ellipse;
+import model.Line;
 import model.Rectangle;
+import outputs.Lista;
 
 public class Aplicacion extends PApplet{
 	
@@ -23,7 +27,6 @@ public class Aplicacion extends PApplet{
 
 	ControlP5 cp5;
 	int tool=0;
-	PApplet g;
 
 	
 	  public void settings(){
@@ -116,24 +119,28 @@ public class Aplicacion extends PApplet{
 
 	}
 
-	void recttool(int x1, int y1, int x2, int y2){
+	void recttool(int a, int b, int c, int d){
 	 Rectangle rectangle=new Rectangle();
+		rectangle.update(a,b,c,d);
 		rectangle.doPaint(g);
-		noFill();
-	  rect(x1,y1,x2,y2);
+		Lista.add(1,a,b,c,d);
 	}
-	void ellitool(int x1, int y1, int x2, int y2){
-	  noFill();
-	  ellipse(x1,y1,x2,y2);
-	}
-
-	void linetool(int x1, int y1, int x2, int y2){
-	  line(x1,y1,x2,y2);
+	void ellitool(int a, int b, int c, int d){
+		 Ellipse ellipse=new Ellipse();
+		 ellipse.update(a,b,c,d);
+		 ellipse.doPaint(g);
 	}
 
-	void arctool(int x1, int y1, int x2, int y2){
-	  noFill();
-	  arc(x1,y1,x2,y2,PI,TWO_PI);
+	void linetool(int a, int b, int c, int d){
+		 Line line=new Line();
+		 line.update(a,b,c,d);
+		 line.doPaint(g);
+	}
+
+	void arctool(int a, int b, int c, int d){
+		 Arc arc=new Arc();
+		 arc.update(a,b,c,d);
+		 arc.doPaint(g);
 	}
 
 	void norm(float x){

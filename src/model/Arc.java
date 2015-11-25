@@ -1,7 +1,7 @@
 package model;
 import processing.core.*;
 
-public class Rectangle extends Figure{
+public class Arc extends Figure{
 
 private	int x1;
 private	int y1;
@@ -19,7 +19,12 @@ private	int y2;
 	@Override
 	public void doPaint(PGraphics g) {
 		g.noFill();
-		g.rect(x1, y1, x2, y2);
+		g.arc(x1, y1, x2, y2,PI,TWO_PI);
 	}
+
+
+
+	
+	
 
 }
