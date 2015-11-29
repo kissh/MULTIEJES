@@ -1,3 +1,7 @@
+/*Esta es la clase principal desde la cual se debe ejecutar el programa. Se requieren instalar las librerias 
+ * core.jar, controlP5.jar
+ */
+
 package controller;//paquete principal del programa principal. Se debe ejecutar siempre Aplicacion
 import processing.core.*;//importacion de librerias de processing
 import java.io.PrintWriter;
@@ -13,38 +17,48 @@ import model.Rectangle;
 public class Aplicacion extends PApplet{
 	
 	//iniciacion coordenadas
-	int x1=0;
-	int y1=0;
-	int x2=x1;
-	int y2=y1;
-	int x_2=x1;
-	int y_2=y1;
+	private int x1=0;
+	private int y1=0;
+	private int x2=x1;
+	private int y2=y1;
+	private int x_2=x1;
+	private int y_2=y1;
+	
+	// atributos para la matriz de figuras
+	private final int column=5;
+	private int row;
+	private int[][] matriz;
+	private int tool=0;
 
 	//iniciacion valores de texto
-	Textfield X1;
-	Textfield Y1;
-	Textfield X2;
-	Textfield Y2;
+	private Textfield X1;
+	private Textfield Y1;
+	private Textfield X2;
+	private Textfield Y2;
+	private String TF1="X1";
+	private String TF2="Y1";
+	private String TF3="X2";
+	private String TF4="Y2";
 
-	String TF1="X1";
-	String TF2="Y1";
-	String TF3="X2";
-	String TF4="Y2";
-
-
-	ControlP5 cp5;
-	int tool=0;
+// 
+	private ControlP5 cp5;
+	private PFont font;
+// declaracion de tipo Drawing	
+	private Drawing drawing;
 	
-	Drawing drawing;
-
-	
+// Metodo para declarar tamano de ventana en eclipse
 	  public void settings(){
 		  size(700, 700);
 	  }
+	  
+// Metodo setup de Processing que se ejecuta una sola vez
 	public void setup() {
-	  PFont font = createFont("arial",8);
+
 	  cp5 = new ControlP5(this);
 	  drawing = new Drawing();
+	  font = createFont("arial",8);
+		
+	  
 	  ButtonBar b = cp5.addButtonBar("bar")
 	     .setPosition(0, 0)
 	     .setSize(400, 20)
@@ -62,21 +76,7 @@ public class Aplicacion extends PApplet{
 	      tool=bar.hover();
 	    }
 	  });
-	    
-	    
-	    
-	    
-	    
-	    
-	  
-	    PrintWriter output = createWriter ("archivo de figuras.txt");
-	    output.println("meter el arreglo con los datos aca");
-	    output.flush();//escribe en el archivo
-	    output.close();//cierra la escritura del archivo
-	    //exit();// sirve pa cerrar el programa cuando uno le ponga un condicion
-	  
-	  
-	     
+  
 	    		
 	   
 	    		
@@ -118,7 +118,7 @@ public class Aplicacion extends PApplet{
 	     ;
 	}
 
-
+	//Metodo draw de Processing que se ejecuta ciclicamente
 	public void draw() {
 		
       X1.setValue(x1);
@@ -159,9 +159,12 @@ public class Aplicacion extends PApplet{
 	  arctool2(x1, y1,x_2, y_2);
 	}
 	drawing.doPaint(g);
-	println(drawing);
 	}
 
+	/*herramientas para crear las figuras. Figuratool crea la figura a partir del punto de Pressed y punto de
+	Released. Figuratool2 crea la figura y muestra el proceso mientras mouseDragged. Si se crea una figura 
+	adicional es necesario declarar Figuratool y Figuratool2 para que se visualice.
+	*/
 	void recttool(int a, int b, int c, int d){
 	 Rectangle rectangle=new Rectangle();
 		rectangle.update(a,b,c,d);
@@ -184,7 +187,6 @@ public class Aplicacion extends PApplet{
 		 ellipse.update(a,b,c,d);
 		 ellipse.doPaint(g);
 	}
-
 	void linetool(int a, int b, int c, int d){
 		 Line line=new Line();
 		 line.update(a,b,c,d);
@@ -196,7 +198,6 @@ public class Aplicacion extends PApplet{
 		 line.update(a,b,c,d);
 		 line.doPaint(g);
 	}
-
 	void arctool(int a, int b, int c, int d){
 		 Arc arc=new Arc();
 		 arc.update(a,b,c,d);
@@ -208,14 +209,17 @@ public class Aplicacion extends PApplet{
 		 arc.update(a,b,c,d);
 		 arc.doPaint(g);
 	}
-
 	void norm(float x){
 	 if (x>=0){
 
 	 } else{
 	 }
 	}
-
+	
+/*Declaracion de los metodos para obtener los eventos del mouse
+ * (non-Javadoc)
+ * @see processing.core.PApplet#mousePressed()
+ */
 	public void mousePressed() {
 	  if (tool==0){
 	    x1=mouseX;
@@ -255,7 +259,6 @@ public class Aplicacion extends PApplet{
 	  
 	  
 	}
-
 	public void mouseDragged() 
 	{
 	    if (tool==0){
@@ -302,9 +305,9 @@ public class Aplicacion extends PApplet{
 
 	}	 	
 	
-	
-	
-	
+	/* Declaracion del metodo para ejecutar PApplet desde App de eclipse. La aplicacion principal se llama 
+	 * Aplicacion y se encuentra dentro del paquete Controller
+	 */
 	public static void main(String args[]) {
 	    PApplet.main(new String[] { "--present", "controller.Aplicacion" });
 	  }

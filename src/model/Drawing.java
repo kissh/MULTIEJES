@@ -24,7 +24,7 @@ public class Drawing {
 		}
 	}
 
-	private int getSize()
+	public int getSize()
 	{
 		return list.size();
 	}

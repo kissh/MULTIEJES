@@ -3,6 +3,7 @@ import processing.core.*;
 
 public class Rectangle extends Figure{
 
+private int Figref;
 private	int x1;
 private	int y1;
 private	int x2;
