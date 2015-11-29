@@ -35,6 +35,7 @@ public class Aplicacion extends PApplet{
 	private Textfield Y1;
 	private Textfield X2;
 	private Textfield Y2;
+	private Textlabel mouseXYtext;
 	private String TF1="X1";
 	private String TF2="Y1";
 	private String TF3="X2";
@@ -116,6 +117,11 @@ public class Aplicacion extends PApplet{
 	     .setAutoClear(false)
 	     .setValue(y2)
 	     ;
+	   
+/*	   int Xpos=mouseX;
+	   int Ypos=mouseY;
+	   mouseXYtext = new Textlabel(cp5,Xpos.toString()+Ypos.toString(),100,100,400,200);
+*/
 	}
 
 	//Metodo draw de Processing que se ejecuta ciclicamente
