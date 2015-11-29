@@ -13,7 +13,6 @@ private	int y2;
 		y1=b;
 		x2=c;
 		y2=d;
-		
 	}
 	
 	@Override
